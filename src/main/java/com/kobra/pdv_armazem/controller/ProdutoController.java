@@ -1,7 +1,6 @@
 package com.kobra.pdv_armazem.controller;
 
 import com.kobra.pdv_armazem.entity.Produto;
-import com.kobra.pdv_armazem.repository.ProdutoRepository;
 import com.kobra.pdv_armazem.service.ProdutoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -14,45 +13,44 @@ import org.springframework.web.bind.annotation.*;
 public class ProdutoController {
 
     private final ProdutoService service;
-    private final ProdutoRepository produtoRepository;
 
     @GetMapping
-    public String listar(Model model){
-
-        model.addAttribute(
-                "produtos",
-                service.listarTodos()
-        );
-
+    public String listar(Model model) {
+        model.addAttribute("produtos", service.listarTodos());
+        model.addAttribute("title", "Produtos - Comercial Reginha");
+        model.addAttribute("pageTitle", "Produtos");
         return "produtos";
     }
 
     @GetMapping("/novo")
-    public String novo(Model model){
+    public String novo(Model model) {
+        model.addAttribute("produto", new Produto());
+        model.addAttribute("title", "Novo Produto - Comercial Reginha");
+        model.addAttribute("pageTitle", "Novo Produto");
+        return "produto-form";
+    }
 
-        model.addAttribute(
-                "produto",
-                new Produto()
-        );
-
+    @GetMapping("/editar/{id}")
+    public String editar(@PathVariable Long id, Model model) {
+        Produto produto = service.buscarPorId(id);
+        if (produto == null) {
+            return "redirect:/produtos";
+        }
+        model.addAttribute("produto", produto);
+        model.addAttribute("title", "Editar Produto - Comercial Reginha");
+        model.addAttribute("pageTitle", "Editar Produto");
         return "produto-form";
     }
 
     @PostMapping
-    public String salvar(
-            @ModelAttribute Produto produto){
-
+    public String salvar(@ModelAttribute Produto produto) {
         service.salvar(produto);
-
         return "redirect:/produtos";
     }
 
-    @GetMapping("/produtos/excluir/{id}")
-    public String excluir(@PathVariable Long id){
-
-        produtoRepository.deleteById(id);
-
+    @GetMapping("/excluir/{id}")
+    public String excluir(@PathVariable Long id) {
+        service.excluir(id);
         return "redirect:/produtos";
     }
-
 }

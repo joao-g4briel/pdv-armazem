@@ -1,149 +1,74 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <title>Produtos</title>
-
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
-
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos - Comercial Reginha</title>
 </head>
 
-<body class="hold-transition sidebar-mini">
+<body>
 
-<div class="wrapper">
+<div th:replace="~{layouts/base :: body}">
 
-    <div th:replace="~{fragments/navbar :: navbar}"></div>
-
-    <div th:replace="~{fragments/sidebar :: sidebar}"></div>
-
-    <div class="content-wrapper">
-
-        <section class="content-header">
-
-            <div class="container-fluid">
-
-                <div class="d-flex justify-content-between">
-
-                    <h1>Produtos</h1>
-
-                    <a href="/produtos/novo"
-                       class="btn btn-success">
-
-                        <i class="fas fa-plus"></i>
-
-                        Novo Produto
-
-                    </a>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <section class="content">
-
-            <div class="container-fluid">
-
+    <div th:fragment="content">
+        <div class="row">
+            <div class="col-12">
                 <div class="card">
-
                     <div class="card-header">
-
-                        <h3 class="card-title">
-                            Lista de Produtos
-                        </h3>
-
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h3 class="card-title">
+                                <i class="fas fa-boxes"></i> Lista de Produtos
+                            </h3>
+                            <a th:href="@{/produtos/novo}" class="btn btn-success">
+                                <i class="fas fa-plus"></i> Novo Produto
+                            </a>
+                        </div>
                     </div>
 
                     <div class="card-body">
-
-                        <table class="table table-bordered table-striped">
-
+                        <table class="table table-bordered table-striped table-hover" id="produtosTable">
                             <thead>
-
                             <tr>
-
                                 <th>Código</th>
                                 <th>Nome</th>
                                 <th>Categoria</th>
-                                <th>Estoque</th>
+                                <th>Unidade</th>
+                                <th>Estoque Atual</th>
                                 <th>Preço Venda</th>
                                 <th>Ações</th>
-
                             </tr>
-
                             </thead>
-
                             <tbody>
-
                             <tr th:each="produto : ${produtos}">
-
                                 <td th:text="${produto.codigo}"></td>
-
                                 <td th:text="${produto.nome}"></td>
-
                                 <td th:text="${produto.categoria}"></td>
-
+                                <td th:text="${produto.unidade}"></td>
                                 <td th:text="${produto.estoqueAtual}"></td>
-
                                 <td>
-
-                                    R$
-
-                                    <span th:text="${#numbers.formatDecimal(produto.precoVenda,1,'POINT',2,'COMMA')}">
-                                    </span>
-
+                                    R$ <span th:text="${#numbers.formatDecimal(produto.precoVenda, 1, 'POINT', 2, 'COMMA')}"></span>
                                 </td>
-
                                 <td>
-
-                                    <a th:href="@{/produtos/editar/{id}(id=${produto.id})}"
-                                       class="btn btn-primary btn-sm">
-
+                                    <a th:href="@{/produtos/editar/{id}(id=${produto.id})}" class="btn btn-primary btn-sm">
                                         <i class="fas fa-edit"></i>
-
                                     </a>
-
                                     <a th:href="@{/produtos/excluir/{id}(id=${produto.id})}"
-                                       class="btn btn-danger btn-sm">
-
+                                       class="btn btn-danger btn-sm"
+                                       onclick="return confirm('Tem certeza que deseja excluir este produto?')">
                                         <i class="fas fa-trash"></i>
-
                                     </a>
-
                                 </td>
-
                             </tr>
-
                             </tbody>
-
                         </table>
-
                     </div>
-
                 </div>
-
             </div>
-
-        </section>
-
+        </div>
     </div>
 
 </div>
 
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
-
 </body>
-
 </html>

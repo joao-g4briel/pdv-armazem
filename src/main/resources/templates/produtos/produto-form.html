@@ -4,152 +4,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Novo Produto - AdminLTE</title>
-
-    <!-- AdminLTE CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@4.0.0/dist/css/adminlte.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <title th:text="'Novo Produto - Comercial Reginha'"></title>
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
+<body>
 
-    <!-- Navbar -->
-    <div th:replace="~{fragments/navbar :: navbar}"></div>
+<div th:replace="~{layouts/base :: body}">
 
-    <!-- Sidebar -->
-    <div th:replace="~{fragments/sidebar :: sidebar}"></div>
-
-    <!-- Content Wrapper -->
-    <div class="content-wrapper">
-        <!-- Content Header -->
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0">Novo Produto</h1>
+    <!-- Content Header já vem do base -->
+    <div th:fragment="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-warning card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-plus"></i> Cadastro de Novo Produto
+                        </h3>
                     </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item"><a href="#">Produtos</a></li>
-                            <li class="breadcrumb-item active">Novo</li>
-                        </ol>
+
+                    <div class="card-body">
+                        <form th:action="@{/produtos}" th:object="${produto}" method="post">
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Código</label>
+                                        <input type="text" class="form-control" th:field="*{codigo}" placeholder="Ex: PROD001">
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label>Nome do Produto</label>
+                                        <input type="text" class="form-control" th:field="*{nome}" placeholder="Nome completo do produto">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Categoria</label>
+                                        <input type="text" class="form-control" th:field="*{categoria}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Unidade</label>
+                                        <input type="text" class="form-control" th:field="*{unidade}" placeholder="Ex: un, kg, cx">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Estoque Atual</label>
+                                        <input type="number" class="form-control" th:field="*{estoqueAtual}" min="0">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Preço de Compra (R$)</label>
+                                        <input type="number" step="0.01" class="form-control" th:field="*{precoCompra}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Preço de Venda (R$)</label>
+                                        <input type="number" step="0.01" class="form-control" th:field="*{precoVenda}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Estoque Mínimo</label>
+                                        <input type="number" class="form-control" th:field="*{estoqueMinimo}" min="0">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <button type="submit" class="btn btn-success btn-lg">
+                                    <i class="fas fa-save"></i> Salvar Produto
+                                </button>
+                                <a th:href="@{/produtos}" class="btn btn-default btn-lg ml-2">
+                                    <i class="fas fa-arrow-left"></i> Voltar
+                                </a>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Main Content -->
-        <section class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card card-warning card-outline">
-                            <div class="card-header">
-                                <h3 class="card-title">
-                                    <i class="fas fa-plus"></i> Cadastro de Produto
-                                </h3>
-                            </div>
-
-                            <div class="card-body">
-                                <form th:action="@{/produtos}" th:object="${produto}" method="post">
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="codigo">Código</label>
-                                                <input type="text" class="form-control" id="codigo"
-                                                       th:field="*{codigo}" placeholder="Ex: PROD001">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-8">
-                                            <div class="form-group">
-                                                <label for="nome">Nome do Produto</label>
-                                                <input type="text" class="form-control" id="nome"
-                                                       th:field="*{nome}" placeholder="Nome completo do produto">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row mt-3">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="categoria">Categoria</label>
-                                                <input type="text" class="form-control" id="categoria"
-                                                       th:field="*{categoria}">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="unidade">Unidade</label>
-                                                <input type="text" class="form-control" id="unidade"
-                                                       th:field="*{unidade}" placeholder="Ex: un, kg, cx">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="estoqueAtual">Estoque Atual</label>
-                                                <input type="number" class="form-control" id="estoqueAtual"
-                                                       th:field="*{estoqueAtual}" min="0">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row mt-3">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="precoCompra">Preço de Compra (R$)</label>
-                                                <input type="number" step="0.01" class="form-control" id="precoCompra"
-                                                       th:field="*{precoCompra}">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="precoVenda">Preço de Venda (R$)</label>
-                                                <input type="number" step="0.01" class="form-control" id="precoVenda"
-                                                       th:field="*{precoVenda}">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="estoqueMinimo">Estoque Mínimo</label>
-                                                <input type="number" class="form-control" id="estoqueMinimo"
-                                                       th:field="*{estoqueMinimo}" min="0">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="mt-4">
-                                        <button type="submit" class="btn btn-success btn-lg">
-                                            <i class="fas fa-save"></i> Salvar Produto
-                                        </button>
-                                        <a href="#" th:href="@{/produtos}" class="btn btn-default btn-lg ml-2">
-                                            <i class="fas fa-arrow-left"></i> Voltar
-                                        </a>
-                                    </div>
-
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
     </div>
-
-    <!-- Footer -->
-    <footer th:replace="~{fragments/footer :: footer}"></footer>
 
 </div>
 
-<!-- AdminLTE JS -->
-<script src="https://cdn.jsdelivr.net/npm/admin-lte@4.0.0/dist/js/adminlte.min.js"></script>
 </body>
 </html>
