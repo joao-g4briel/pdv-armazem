@@ -1,6 +1,7 @@
 package com.kobra.pdv_armazem.controller;
 
 import com.kobra.pdv_armazem.entity.Produto;
+import com.kobra.pdv_armazem.repository.ProdutoRepository;
 import com.kobra.pdv_armazem.service.ProdutoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class ProdutoController {
 
     private final ProdutoService service;
+    private final ProdutoRepository produtoRepository;
 
     @GetMapping
     public String listar(Model model){
@@ -41,6 +43,14 @@ public class ProdutoController {
             @ModelAttribute Produto produto){
 
         service.salvar(produto);
+
+        return "redirect:/produtos";
+    }
+
+    @GetMapping("/produtos/excluir/{id}")
+    public String excluir(@PathVariable Long id){
+
+        produtoRepository.deleteById(id);
 
         return "redirect:/produtos";
     }
