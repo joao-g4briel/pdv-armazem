@@ -19,7 +19,7 @@ public class ProdutoController {
         model.addAttribute("produtos", service.listarTodos());
         model.addAttribute("title", "Produtos - Comercial Reginha");
         model.addAttribute("pageTitle", "Produtos");
-        return "produtos";
+        return "produtos/produtos";
     }
 
     @GetMapping("/novo")

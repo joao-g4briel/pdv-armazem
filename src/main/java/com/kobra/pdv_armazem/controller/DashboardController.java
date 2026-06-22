@@ -26,6 +26,6 @@ public class DashboardController {
         // TODO: Implementar futuramente com VendaService
         model.addAttribute("vendasHoje", 12);
 
-        return "dashboard";
+        return "dashboard/dashboard";
     }
 }
