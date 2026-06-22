@@ -12,6 +12,7 @@
 
     <style>
         .main-sidebar { background-color: #0B1E36 !important; }
+        .brand-link { border-bottom: 1px solid #4b5563; }
     </style>
 </head>
 
@@ -26,6 +27,7 @@
 
     <!-- Content Wrapper -->
     <div class="content-wrapper">
+        <!-- Content Header -->
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
@@ -42,10 +44,11 @@
             </div>
         </div>
 
+        <!-- Main Content -->
         <section class="content">
             <div class="container-fluid">
-                <!-- Conteúdo da página -->
-                <div th:replace="${content}"></div>
+                <!-- Aqui entra o conteúdo das páginas -->
+                <div th:replace="~{${content}}"></div>
             </div>
         </section>
     </div>
@@ -55,6 +58,7 @@
 
 </div>
 
+<!-- AdminLTE JS -->
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@4.0.0/dist/js/adminlte.min.js"></script>
 </body>
 </html>
