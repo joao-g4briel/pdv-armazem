@@ -27,7 +27,7 @@ public class ProdutoController {
         model.addAttribute("produto", new Produto());
         model.addAttribute("title", "Novo Produto - Comercial Reginha");
         model.addAttribute("pageTitle", "Novo Produto");
-        return "produto-form";
+        return "produtos/produto-form";
     }
 
     @GetMapping("/editar/{id}")
@@ -39,7 +39,7 @@ public class ProdutoController {
         model.addAttribute("produto", produto);
         model.addAttribute("title", "Editar Produto - Comercial Reginha");
         model.addAttribute("pageTitle", "Editar Produto");
-        return "produto-form";
+        return "produtos/produto-form";
     }
 
     @PostMapping
