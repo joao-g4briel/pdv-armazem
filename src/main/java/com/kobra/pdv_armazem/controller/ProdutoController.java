@@ -19,7 +19,7 @@ public class ProdutoController {
         model.addAttribute("produtos", service.listarTodos());
         model.addAttribute("title", "Produtos - Comercial Reginha");
         model.addAttribute("pageTitle", "Produtos");
-        return "produtos/produtos";
+        return "produtos";
     }
 
     @GetMapping("/novo")
@@ -27,7 +27,7 @@ public class ProdutoController {
         model.addAttribute("produto", new Produto());
         model.addAttribute("title", "Novo Produto - Comercial Reginha");
         model.addAttribute("pageTitle", "Novo Produto");
-        return "produtos/produto-form";
+        return "produto-form";
     }
 
     @GetMapping("/editar/{id}")
@@ -39,7 +39,7 @@ public class ProdutoController {
         model.addAttribute("produto", produto);
         model.addAttribute("title", "Editar Produto - Comercial Reginha");
         model.addAttribute("pageTitle", "Editar Produto");
-        return "produtos/produto-form";
+        return "produto-form";
     }
 
     @PostMapping
