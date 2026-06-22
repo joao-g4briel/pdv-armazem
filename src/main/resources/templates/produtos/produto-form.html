@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<div class="main-content">
+
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <div class="page">
+
+        <div class="card">
+
+            <div class="card-header bg-warning">
+
+                <h4>Novo Produto</h4>
+
+            </div>
+
+            <div class="card-body">
+
+                <form th:action="@{/produtos}"
+                      th:object="${produto}"
+                      method="post">
+
+                    <div class="row">
+
+                        <div class="col-md-4">
+
+                            <label>Código</label>
+
+                            <input class="form-control"
+                                   th:field="*{codigo}">
+
+                        </div>
+
+                        <div class="col-md-8">
+
+                            <label>Nome</label>
+
+                            <input class="form-control"
+                                   th:field="*{nome}">
+
+                        </div>
+
+                    </div>
+
+                    <div class="row mt-3">
+
+                        <div class="col-md-4">
+
+                            <label>Categoria</label>
+
+                            <input class="form-control"
+                                   th:field="*{categoria}">
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <label>Unidade</label>
+
+                            <input class="form-control"
+                                   th:field="*{unidade}">
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <label>Estoque</label>
+
+                            <input class="form-control"
+                                   th:field="*{estoqueAtual}">
+
+                        </div>
+
+                    </div>
+
+                    <div class="row mt-3">
+
+                        <div class="col-md-4">
+
+                            <label>Preço Compra</label>
+
+                            <input class="form-control"
+                                   th:field="*{precoCompra}">
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <label>Preço Venda</label>
+
+                            <input class="form-control"
+                                   th:field="*{precoVenda}">
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <label>Estoque Mínimo</label>
+
+                            <input class="form-control"
+                                   th:field="*{estoqueMinimo}">
+
+                        </div>
+
+                    </div>
+
+                    <button class="btn btn-success mt-4">
+
+                        Salvar Produto
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

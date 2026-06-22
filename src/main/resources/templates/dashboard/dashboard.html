@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layouts/base :: head}"></head>
+
+<body>
+
+<div class="main-content">
+
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <div class="page">
+
+        <h2 class="mb-4">
+
+            Dashboard
+
+        </h2>
+
+        <div class="row">
+
+            <div class="col-md-3">
+
+                <div class="card">
+
+                    <div class="card-body">
+
+                        <h6>Total Produtos</h6>
+
+                        <div class="card-value">
+                            125
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <div class="card">
+
+                    <div class="card-body">
+
+                        <h6>Estoque Baixo</h6>
+
+                        <div class="card-value">
+                            8
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <div class="card">
+
+                    <div class="card-body">
+
+                        <h6>Sem Estoque</h6>
+
+                        <div class="card-value">
+                            2
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <div class="card">
+
+                    <div class="card-body">
+
+                        <h6>Valor Estoque</h6>
+
+                        <div class="card-value">
+                            R$ 58K
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
