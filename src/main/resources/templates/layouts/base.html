@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${title} ?: 'Comercial Reginha'"></title>
 
-    <!-- AdminLTE 4 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@4.0.0/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
@@ -44,8 +43,8 @@
 
         <section class="content">
             <div class="container-fluid">
-                <!-- Conteúdo dinâmico das páginas -->
-                <div th:insert="${content}"></div>
+                <!-- CONTEÚDO DINÂMICO -->
+                <div th:replace="~{${content}}"></div>
             </div>
         </section>
     </div>
