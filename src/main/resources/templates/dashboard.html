@@ -1,16 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${title}"></title>
-</head>
-
-<body>
-
 <div th:replace="~{layouts/base :: body}">
-
     <div th:fragment="content">
 
         <!-- Info Boxes -->
@@ -21,12 +9,8 @@
                         <h3 th:text="${totalProdutos} ?: '0'"></h3>
                         <p>Produtos Cadastrados</p>
                     </div>
-                    <div class="icon">
-                        <i class="fas fa-boxes"></i>
-                    </div>
-                    <a th:href="@{/produtos}" class="small-box-footer">
-                        Ver todos <i class="fas fa-arrow-circle-right"></i>
-                    </a>
+                    <div class="icon"><i class="fas fa-boxes"></i></div>
+                    <a th:href="@{/produtos}" class="small-box-footer">Ver todos <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
 
@@ -36,10 +20,8 @@
                         <h3>R$ <span th:text="${#numbers.formatDecimal(totalValorEstoque, 1, 'POINT', 2, 'COMMA')} ?: '0,00'"></span></h3>
                         <p>Valor Total em Estoque</p>
                     </div>
-                    <div class="icon">
-                        <i class="fas fa-dollar-sign"></i>
-                    </div>
-                    <a href="#" class="small-box-footer">Mais informações <i class="fas fa-arrow-circle-right"></i></a>
+                    <div class="icon"><i class="fas fa-dollar-sign"></i></div>
+                    <a href="#" class="small-box-footer">Ver detalhes <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
 
@@ -47,112 +29,31 @@
                 <div class="small-box bg-warning">
                     <div class="inner">
                         <h3 th:text="${produtosBaixoEstoque} ?: '0'"></h3>
-                        <p>Produtos em Baixo Estoque</p>
+                        <p>Produtos Baixo Estoque</p>
                     </div>
-                    <div class="icon">
-                        <i class="fas fa-exclamation-triangle"></i>
-                    </div>
-                    <a th:href="@{/produtos}" class="small-box-footer">
-                        Ver produtos <i class="fas fa-arrow-circle-right"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-6">
-                <div class="small-box bg-danger">
-                    <div class="inner">
-                        <h3 th:text="${vendasHoje} ?: '0'"></h3>
-                        <p>Vendas Hoje</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-shopping-cart"></i>
-                    </div>
-                    <a href="#" class="small-box-footer">Ver PDV <i class="fas fa-arrow-circle-right"></i></a>
+                    <div class="icon"><i class="fas fa-exclamation-triangle"></i></div>
+                    <a href="#" class="small-box-footer">Ver lista <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
         </div>
 
-        <div class="row mt-4">
-            <!-- Gráfico de Vendas -->
-            <div class="col-lg-8">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Vendas dos Últimos 7 Dias</h3>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="salesChart" height="130"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Produtos em Alerta -->
-            <div class="col-lg-4">
-                <div class="card">
-                    <div class="card-header bg-warning">
-                        <h3 class="card-title">Produtos em Alerta</h3>
-                    </div>
-                    <div class="card-body p-0">
-                        <ul class="products-list product-list-in-card">
-                            <li class="item" th:each="p : ${produtosCriticos}" th:if="${produtosCriticos}">
-                                <div class="product-info">
-                                    <span class="product-title" th:text="${p.nome}"></span>
-                                    <span class="product-description">
-                                        Estoque: <strong th:text="${p.estoqueAtual}"></strong> |
-                                        Mín: <strong th:text="${p.estoqueMinimo}"></strong>
-                                    </span>
-                                </div>
-                            </li>
-                            <li class="item" th:if="${produtosCriticos.isEmpty()}">
-                                <div class="product-info text-muted">
-                                    Nenhum produto em alerta no momento.
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Acesso Rápido -->
+        <!-- Gráfico -->
         <div class="row mt-4">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Acesso Rápido</h3>
+                        <h3 class="card-title">Vendas da Semana</h3>
                     </div>
                     <div class="card-body">
-                        <div class="row text-center">
-                            <div class="col-md-3 col-6">
-                                <a th:href="@{/produtos/novo}" class="btn btn-app bg-warning">
-                                    <i class="fas fa-plus"></i> Novo Produto
-                                </a>
-                            </div>
-                            <div class="col-md-3 col-6">
-                                <a href="#" class="btn btn-app bg-success">
-                                    <i class="fas fa-cash-register"></i> Abrir PDV
-                                </a>
-                            </div>
-                            <div class="col-md-3 col-6">
-                                <a href="#" class="btn btn-app bg-info">
-                                    <i class="fas fa-truck"></i> Entrada
-                                </a>
-                            </div>
-                            <div class="col-md-3 col-6">
-                                <a href="#" class="btn btn-app bg-primary">
-                                    <i class="fas fa-file-invoice"></i> Relatórios
-                                </a>
-                            </div>
-                        </div>
+                        <canvas id="salesChart" height="100"></canvas>
                     </div>
                 </div>
             </div>
         </div>
 
     </div>
-
 </div>
 
-<!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script th:inline="javascript">
     $(function () {
@@ -161,21 +62,12 @@
             data: {
                 labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
                 datasets: [{
-                    label: 'Valor em Vendas (R$)',
+                    label: 'Vendas (R$)',
                     data: [1250, 980, 2150, 1870, 3200, 1450, 890],
-                    backgroundColor: '#28a745',
-                    borderColor: '#218838',
-                    borderWidth: 1
+                    backgroundColor: '#28a745'
                 }]
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { display: false } }
-            }
+            options: { responsive: true }
         });
     });
 </script>
-
-</body>
-</html>

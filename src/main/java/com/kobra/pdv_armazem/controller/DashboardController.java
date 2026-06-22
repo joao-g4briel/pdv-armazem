@@ -23,8 +23,8 @@ public class DashboardController {
         model.addAttribute("produtosBaixoEstoque", produtoService.countProdutosBaixoEstoque());
         model.addAttribute("produtosCriticos", produtoService.findProdutosCriticos(5));
 
-        // TODO: Implementar futuramente com VendaService
-        model.addAttribute("vendasHoje", 12);
+        // Para o content do layout
+        model.addAttribute("content", "dashboard :: content");
 
         return "dashboard";
     }
