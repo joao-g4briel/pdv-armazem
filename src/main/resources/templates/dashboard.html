@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Comercial Reginha</title>
+    <title th:text="${title}"></title>
 </head>
 
 <body>
@@ -72,19 +72,20 @@
             </div>
         </div>
 
-        <!-- Restante do conteúdo (gráfico, alertas, etc.) -->
         <div class="row mt-4">
+            <!-- Gráfico de Vendas -->
             <div class="col-lg-8">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Vendas dos Últimos 7 Dias</h3>
                     </div>
                     <div class="card-body">
-                        <canvas id="salesChart" height="120"></canvas>
+                        <canvas id="salesChart" height="130"></canvas>
                     </div>
                 </div>
             </div>
 
+            <!-- Produtos em Alerta -->
             <div class="col-lg-4">
                 <div class="card">
                     <div class="card-header bg-warning">
@@ -92,7 +93,7 @@
                     </div>
                     <div class="card-body p-0">
                         <ul class="products-list product-list-in-card">
-                            <li class="item" th:each="p : ${produtosCriticos}">
+                            <li class="item" th:each="p : ${produtosCriticos}" th:if="${produtosCriticos}">
                                 <div class="product-info">
                                     <span class="product-title" th:text="${p.nome}"></span>
                                     <span class="product-description">
@@ -101,7 +102,47 @@
                                     </span>
                                 </div>
                             </li>
+                            <li class="item" th:if="${produtosCriticos.isEmpty()}">
+                                <div class="product-info text-muted">
+                                    Nenhum produto em alerta no momento.
+                                </div>
+                            </li>
                         </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Acesso Rápido -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Acesso Rápido</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row text-center">
+                            <div class="col-md-3 col-6">
+                                <a th:href="@{/produtos/novo}" class="btn btn-app bg-warning">
+                                    <i class="fas fa-plus"></i> Novo Produto
+                                </a>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <a href="#" class="btn btn-app bg-success">
+                                    <i class="fas fa-cash-register"></i> Abrir PDV
+                                </a>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <a href="#" class="btn btn-app bg-info">
+                                    <i class="fas fa-truck"></i> Entrada
+                                </a>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <a href="#" class="btn btn-app bg-primary">
+                                    <i class="fas fa-file-invoice"></i> Relatórios
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -111,6 +152,7 @@
 
 </div>
 
+<!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script th:inline="javascript">
     $(function () {
@@ -119,12 +161,18 @@
             data: {
                 labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
                 datasets: [{
-                    label: 'Vendas (R$)',
+                    label: 'Valor em Vendas (R$)',
                     data: [1250, 980, 2150, 1870, 3200, 1450, 890],
-                    backgroundColor: '#28a745'
+                    backgroundColor: '#28a745',
+                    borderColor: '#218838',
+                    borderWidth: 1
                 }]
             },
-            options: { responsive: true, maintainAspectRatio: false }
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } }
+            }
         });
     });
 </script>
